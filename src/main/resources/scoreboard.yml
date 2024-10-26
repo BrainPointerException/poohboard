@@ -1,0 +1,16 @@
+scoreboard:
+  title: "&6&lPOOHSCORD.DE"
+  lines:
+    - "&0      "
+    - "&6Name: &f%player_name%"
+    - "&1 "
+    - "&6Rang: &f%group_name%"
+    - "&2  "
+    - "&6Honigtropfen:"
+    - "&a%honigtropfen%"
+    - "&3   "
+    - "&6Honigkristalle:"
+    - "&b%honigkristalle%"
+    - "&4    "
+    - "&6Online: &f%online_players%/%max_players%"
+    - "&5     "

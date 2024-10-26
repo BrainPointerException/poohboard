@@ -1,0 +1,8 @@
+name: PoohBoardPlugin
+version: 1.0.0
+main: de.poohscord.poohboard.PoohBoardPlugin
+description: Poohboard
+author: BrainPointerException
+api-version: 1.21.1
+depend:
+  - LuckPerms

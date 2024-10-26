@@ -1,0 +1,20 @@
+services:
+  pooh:
+    image: itzg/minecraft-server
+    ports:
+      - target: 25565
+        published: 25565
+        protocol: tcp
+        mode: host
+    environment:
+        EULA: "TRUE"
+        VERSION: "1.21.1"
+        TYPE: "PAPER"
+        MEMORY: "1G"
+        TZ: "Europe/Berlin"
+        SERVER_PORT: "25565"
+        ONLINE_MODE: "FALSE"
+    volumes:
+      - type: bind
+        source: ./data
+        target: /data/plugins
