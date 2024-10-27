@@ -23,4 +23,10 @@ public class LuckPermsGroupImpl implements IGroup {
     public String getGroupName(Player player) {
         return this.api.getUserManager().getUser(player.getUniqueId()).getPrimaryGroup();
     }
+
+    @Override
+    public String getGroupPrefix(Player player) {
+        return this.api.getGroupManager().getGroup(this.api.getUserManager().getUser(player.getUniqueId()).getPrimaryGroup())
+                .getCachedData().getMetaData().getPrefix();
+    }
 }

@@ -111,7 +111,7 @@ public class ScoreboardImpl implements IScoreboard {
         Component component = null;
         switch (placeholder) {
             case PLAYER_NAME -> component = Component.text(player.getName());
-            case GROUP_NAME -> component = Component.text(this.group.getGroupName(player));
+            case GROUP_NAME -> component = Component.text(this.group.getGroupPrefix(player).split(" ")[0]);
             case ONLINE_PLAYERS -> component = Component.text(Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
             case HONIGTROPFEN -> component = Component.text(0);
             case HONIGKRISTALLE -> component = Component.text(0);

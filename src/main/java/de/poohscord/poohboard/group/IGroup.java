@@ -6,4 +6,6 @@ public interface IGroup {
 
     String getGroupName(Player player);
 
+    String getGroupPrefix(Player player);
+
 }

@@ -9,4 +9,9 @@ public class FallbackGroupImpl implements IGroup {
     public String getGroupName(Player player) {
         return "default";
     }
+
+    @Override
+    public String getGroupPrefix(Player player) {
+        return "default";
+    }
 }

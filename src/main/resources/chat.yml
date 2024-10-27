@@ -1,0 +1,2 @@
+chat:
+  prefix: "%group_prefix%%player_name% &8| &7"

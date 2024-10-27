@@ -7,18 +7,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.List;
 
-public class ScoreboardConfigImpl implements IScoreboardConfig {
+public class ScoreboardYamlConfigImpl implements IScoreboardConfig {
 
-    private final File file;
     private final YamlConfiguration config;
 
-    public ScoreboardConfigImpl(JavaPlugin plugin) {
-        this.file = new File(plugin.getDataFolder(),"scoreboard.yml");
-        if (!this.file.exists()) {
+    public ScoreboardYamlConfigImpl(JavaPlugin plugin) {
+        final File file = new File(plugin.getDataFolder(), "scoreboard.yml");
+        if (!file.exists()) {
             plugin.saveResource("scoreboard.yml", false);
         }
 
-        this.config = YamlConfiguration.loadConfiguration(this.file);
+        this.config = YamlConfiguration.loadConfiguration(file);
     }
 
     @Override
