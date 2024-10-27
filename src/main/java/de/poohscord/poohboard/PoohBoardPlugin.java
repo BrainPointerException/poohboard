@@ -1,12 +1,13 @@
 package de.poohscord.poohboard;
 
-import de.poohscord.poohboard.group.GroupFactory;
+import de.poohscord.poohboard.group.IGroupFactory;
+import de.poohscord.poohboard.group.impl.factory.GroupFactoryImpl;
 import de.poohscord.poohboard.group.IGroup;
 import de.poohscord.poohboard.scoreboard.IScoreboard;
 import de.poohscord.poohboard.scoreboard.IScoreboardConfig;
-import de.poohscord.poohboard.scoreboard.impl.ScoreboardConfigImpl;
-import de.poohscord.poohboard.scoreboard.impl.ScoreboardImpl;
-import de.poohscord.poohboard.scoreboard.impl.ScoreboardListener;
+import de.poohscord.poohboard.scoreboard.impl.config.ScoreboardConfigImpl;
+import de.poohscord.poohboard.scoreboard.impl.board.ScoreboardImpl;
+import de.poohscord.poohboard.scoreboard.impl.listener.ScoreboardListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,7 +20,8 @@ public class PoohBoardPlugin extends JavaPlugin {
             getDataFolder().mkdir();
         }
 
-        IGroup group = new GroupFactory().makeGroup();
+        IGroupFactory groupFactory = new GroupFactoryImpl();
+        IGroup group = groupFactory.makeGroup();
 
         IScoreboardConfig config = new ScoreboardConfigImpl(this);
         IScoreboard board = new ScoreboardImpl(config, group);

@@ -1,4 +1,4 @@
-package de.poohscord.poohboard.group.impl;
+package de.poohscord.poohboard.group.impl.group;
 
 import de.poohscord.poohboard.group.IGroup;
 import org.bukkit.entity.Player;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 public class FallbackGroupImpl implements IGroup {
 
     @Override
-    public String getGroup(Player player) {
+    public String getGroupName(Player player) {
         return "default";
     }
 }

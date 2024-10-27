@@ -1,4 +1,4 @@
-package de.poohscord.poohboard.scoreboard.impl;
+package de.poohscord.poohboard.scoreboard.impl.config;
 
 import de.poohscord.poohboard.scoreboard.IScoreboardConfig;
 import org.bukkit.configuration.file.YamlConfiguration;

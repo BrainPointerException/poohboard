@@ -4,6 +4,6 @@ import org.bukkit.entity.Player;
 
 public interface IGroup {
 
-    String getGroup(Player player);
+    String getGroupName(Player player);
 
 }

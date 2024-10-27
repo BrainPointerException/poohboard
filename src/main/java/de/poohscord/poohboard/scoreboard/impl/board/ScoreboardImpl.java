@@ -1,4 +1,4 @@
-package de.poohscord.poohboard.scoreboard.impl;
+package de.poohscord.poohboard.scoreboard.impl.board;
 
 import de.poohscord.poohboard.group.IGroup;
 import de.poohscord.poohboard.scoreboard.IScoreboard;
@@ -111,9 +111,8 @@ public class ScoreboardImpl implements IScoreboard {
         Component component = null;
         switch (placeholder) {
             case PLAYER_NAME -> component = Component.text(player.getName());
-            case GROUP_NAME -> component = Component.text(this.group.getGroup(player));
-            case ONLINE_PLAYERS -> component = Component.text(Bukkit.getOnlinePlayers().size());
-            case MAX_PLAYERS -> component = Component.text(Bukkit.getMaxPlayers());
+            case GROUP_NAME -> component = Component.text(this.group.getGroupName(player));
+            case ONLINE_PLAYERS -> component = Component.text(Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
             case HONIGTROPFEN -> component = Component.text(0);
             case HONIGKRISTALLE -> component = Component.text(0);
         }
@@ -124,7 +123,6 @@ public class ScoreboardImpl implements IScoreboard {
         PLAYER_NAME("%player_name%", "§0"),
         GROUP_NAME("%group_name%", "§1"),
         ONLINE_PLAYERS("%online_players%", "§2"),
-        MAX_PLAYERS("%max_players%", "§3"),
         HONIGTROPFEN("%honigtropfen%", "§4"),
         HONIGKRISTALLE("%honigkristalle%", "§5");
 

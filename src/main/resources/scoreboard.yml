@@ -12,5 +12,5 @@ scoreboard:
     - "&6Honigkristalle:"
     - "&b%honigkristalle%"
     - "&4    "
-    - "&6Online: &f%online_players%/%max_players%"
+    - "&6Online: &f%online_players%"
     - "&5     "

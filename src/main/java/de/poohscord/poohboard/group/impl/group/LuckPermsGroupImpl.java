@@ -1,4 +1,4 @@
-package de.poohscord.poohboard.group.impl;
+package de.poohscord.poohboard.group.impl.group;
 
 import de.poohscord.poohboard.group.IGroup;
 import net.luckperms.api.LuckPerms;
@@ -20,7 +20,7 @@ public class LuckPermsGroupImpl implements IGroup {
     }
 
     @Override
-    public String getGroup(Player player) {
+    public String getGroupName(Player player) {
         return this.api.getUserManager().getUser(player.getUniqueId()).getPrimaryGroup();
     }
 }

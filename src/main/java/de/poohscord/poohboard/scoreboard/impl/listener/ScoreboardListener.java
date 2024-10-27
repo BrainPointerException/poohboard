@@ -1,4 +1,4 @@
-package de.poohscord.poohboard.scoreboard.impl;
+package de.poohscord.poohboard.scoreboard.impl.listener;
 
 import de.poohscord.poohboard.scoreboard.IScoreboard;
 import org.bukkit.entity.Player;
