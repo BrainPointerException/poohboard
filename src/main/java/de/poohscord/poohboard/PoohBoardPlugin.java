@@ -37,9 +37,8 @@ public class PoohBoardPlugin extends JavaPlugin {
         pm.registerEvents(new ScoreboardListener(board), this);
         pm.registerEvents(new ChatListener(chatConfig), this);
 
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
-            Bukkit.getOnlinePlayers().forEach(board::update);
-        }, 0, 20*3);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> Bukkit.getOnlinePlayers()
+                .forEach(board::update), 0, 20*3);
     }
 
     @Override

@@ -21,9 +21,12 @@ public class ScoreboardImpl implements IScoreboard {
 
     private final Map<String, Scoreboard> boards = new HashMap<>();
 
+    private final Map<String, String> prefixes;
+
     public ScoreboardImpl(IScoreboardConfig config, IGroup group) {
         this.config = config;
         this.group = group;
+        this.prefixes = this.group.getGroupPrefixesSortedByGroupWeight();
     }
 
     @Override
@@ -72,7 +75,7 @@ public class ScoreboardImpl implements IScoreboard {
 
             objective.getScore(teamEntry).setScore(config.getLines().size() - i);
         }
-
+        setPlayerTabList(player, board);
         player.setScoreboard(board);
     }
 
@@ -98,6 +101,24 @@ public class ScoreboardImpl implements IScoreboard {
     @Override
     public void delete(Player player) {
         this.boards.remove(player.getUniqueId().toString());
+    }
+
+    private void setPlayerTabList(Player player, Scoreboard board) {
+        this.prefixes.forEach((name, prefix) -> board.registerNewTeam(name)
+                .prefix(LegacyComponentSerializer
+                        .legacyAmpersand().deserialize(prefix)));
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            for (Map.Entry<String, String> entry : this.prefixes.entrySet()) {
+                String playerPrefix = this.group.getGroupPrefix(onlinePlayer);
+                if (playerPrefix.equals(entry.getValue())) {
+                    if (onlinePlayer.getName().equals(player.getName())) {
+                        this.boards.forEach((uuid, scoreboard) -> scoreboard.getTeam(entry.getKey()).addEntry(player.getName()));
+                        continue;
+                    }
+                    board.getTeam(entry.getKey()).addEntry(onlinePlayer.getName());
+                }
+            }
+        }
     }
 
     private void setTeamPrefixWithPlaceholder(Team team, Player player, String formattedLine, Placeholder placeholder) {
