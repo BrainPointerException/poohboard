@@ -3,10 +3,13 @@ package de.poohscord.poohboard.scoreboard.impl.board;
 import de.poohscord.poohboard.group.IGroup;
 import de.poohscord.poohboard.scoreboard.IScoreboard;
 import de.poohscord.poohboard.scoreboard.IScoreboardConfig;
+import de.poohscord.pooheconomy.economy.Currency;
+import de.poohscord.pooheconomy.economy.EconomyManager;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.*;
 
 import java.util.HashMap;
@@ -19,14 +22,20 @@ public class ScoreboardImpl implements IScoreboard {
 
     private final IGroup group;
 
+    private final EconomyManager eco;
+
+    private final JavaPlugin plugin;
+
     private final Map<String, Scoreboard> boards = new HashMap<>();
 
     private final Map<String, String> prefixes;
 
-    public ScoreboardImpl(IScoreboardConfig config, IGroup group) {
+    public ScoreboardImpl(IScoreboardConfig config, IGroup group, EconomyManager eco, JavaPlugin plugin) {
         this.config = config;
         this.group = group;
         this.prefixes = this.group.getGroupPrefixesSortedByGroupWeight();
+        this.eco = eco;
+        this.plugin = plugin;
     }
 
     @Override
@@ -69,7 +78,8 @@ public class ScoreboardImpl implements IScoreboard {
                 teamEntry = placeholder.getTeamEntry();
                 team.addEntry(teamEntry);
 
-                setTeamPrefixWithPlaceholder(team, player, formattedLine, placeholder);
+                Bukkit.getScheduler().runTaskAsynchronously(this.plugin, () ->
+                        setTeamPrefixWithPlaceholder(team, player, formattedLine, placeholder));
                 break;
             }
 
@@ -134,8 +144,8 @@ public class ScoreboardImpl implements IScoreboard {
             case PLAYER_NAME -> component = Component.text(player.getName());
             case GROUP_NAME -> component = Component.text(this.group.getGroupPrefix(player).split(" ")[0]);
             case ONLINE_PLAYERS -> component = Component.text(Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
-            case HONIGTROPFEN -> component = Component.text(0);
-            case HONIGKRISTALLE -> component = Component.text(0);
+            case HONIGTROPFEN -> component = Component.text(this.eco.getBalance(player, Currency.HONIGTROPFEN).block());
+            case HONIGKRISTALLE -> component = Component.text(this.eco.getBalance(player, Currency.HONIGKRISTALLE).block());
         }
         return component;
     }

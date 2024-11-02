@@ -6,3 +6,4 @@ author: BrainPointerException
 api-version: 1.21.1
 depend:
   - LuckPerms
+  - PoohEconomyPlugin

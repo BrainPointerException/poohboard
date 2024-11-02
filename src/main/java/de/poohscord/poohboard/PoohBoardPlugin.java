@@ -11,6 +11,7 @@ import de.poohscord.poohboard.scoreboard.IScoreboardConfig;
 import de.poohscord.poohboard.scoreboard.impl.config.ScoreboardYamlConfigImpl;
 import de.poohscord.poohboard.scoreboard.impl.board.ScoreboardImpl;
 import de.poohscord.poohboard.scoreboard.impl.listener.ScoreboardListener;
+import de.poohscord.pooheconomy.PoohEconomyPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,7 +30,7 @@ public class PoohBoardPlugin extends JavaPlugin {
         IGroup group = groupFactory.makeGroup();
 
         IScoreboardConfig config = new ScoreboardYamlConfigImpl(this);
-        this.board = new ScoreboardImpl(config, group);
+        this.board = new ScoreboardImpl(config, group, PoohEconomyPlugin.getEconomyManager(), this);
 
         IChatConfig chatConfig = new ChatYamlConfigImpl(this, group);
 
