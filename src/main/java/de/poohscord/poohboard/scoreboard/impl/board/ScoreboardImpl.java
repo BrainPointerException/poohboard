@@ -15,6 +15,7 @@ import org.bukkit.scoreboard.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class ScoreboardImpl implements IScoreboard {
 
@@ -144,8 +145,14 @@ public class ScoreboardImpl implements IScoreboard {
             case PLAYER_NAME -> component = Component.text(player.getName());
             case GROUP_NAME -> component = Component.text(this.group.getGroupPrefix(player).split(" ")[0]);
             case ONLINE_PLAYERS -> component = Component.text(Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
-            case HONIGTROPFEN -> component = Component.text(this.eco.getBalance(player, Currency.HONIGTROPFEN).block());
-            case HONIGKRISTALLE -> component = Component.text(this.eco.getBalance(player, Currency.HONIGKRISTALLE).block());
+            case HONIGTROPFEN -> {
+                Integer tropfen = this.eco.getBalance(player, Currency.HONIGTROPFEN).block();
+                component = Component.text(Objects.requireNonNullElse(tropfen, 0));
+            }
+            case HONIGKRISTALLE -> {
+                Integer kristalle = this.eco.getBalance(player, Currency.HONIGKRISTALLE).block();
+                component = Component.text(Objects.requireNonNullElse(kristalle, 0));
+            }
         }
         return component;
     }
